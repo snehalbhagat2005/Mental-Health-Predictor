@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mental Health Predictor</title>
+
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== HEADER / NAVBAR ===================== -->
+<header class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <span class="logo-icon"><i class="fa-solid fa-brain"></i></span>
+      <span class="logo-text">Mental Health Predictor</span>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#predict" class="nav-link">Predict</a>
+      <a href="#about" class="nav-link">About</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===================== HERO SECTION ===================== -->
+<section class="hero" id="home">
+  <div class="hero-container">
+    <div class="hero-text">
+      <h1 class="hero-heading">Mental Health Predictor</h1>
+      <p class="hero-subheading">
+        Understand how lifestyle, academic habits, and social media usage may
+        influence student mental health.
+      </p>
+      <button class="btn btn-primary btn-large" id="ctaBtn">
+        Start Prediction <i class="fa-solid fa-arrow-right"></i>
+      </button>
+      <p class="disclaimer">
+        <i class="fa-solid fa-circle-info"></i>
+        Educational prediction tool — not a medical diagnosis.
+      </p>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card floating">
+        <div class="hero-card-inner">
+          <div class="orbit-icon orbit-1"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div class="orbit-icon orbit-2"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div class="orbit-icon orbit-3"><i class="fa-solid fa-heart-pulse"></i></div>
+          <div class="orbit-icon orbit-4"><i class="fa-solid fa-microchip"></i></div>
+
+          <svg viewBox="0 0 200 200" class="brain-svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#5eb8ff"/>
+                <stop offset="100%" stop-color="#2f8fe0"/>
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r="70" fill="url(#brainGrad)" opacity="0.15"/>
+            <circle cx="100" cy="100" r="50" fill="url(#brainGrad)" opacity="0.25"/>
+            <path d="M100 55c-20 0-35 15-35 33 0 10 4 17 4 17s-10 3-10 16c0 12 10 18 10 18s-3 9 5 16c7 6 16 5 16 5s5 8 15 8 15-8 15-8 9 1 16-5c8-7 5-16 5-16s10-6 10-18c0-13-10-16-10-16s4-7 4-17c0-18-15-33-35-33z"
+                  fill="none" stroke="#1c5c96" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M100 60v75M85 70c8 5 8 15 0 20M115 70c-8 5-8 15 0 20M80 100c10 3 10 15 0 18M120 100c-10 3-10 15 0 18"
+                  fill="none" stroke="#1c5c96" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+
+          <p class="hero-card-label">AI-Powered Analysis</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PREDICTION FORM SECTION ===================== -->
+<section class="predict-section" id="predict">
+  <div class="section-container">
+
+    <div class="form-card" id="formCard">
+      <h2 class="form-title">Student Information</h2>
+      <p class="form-subtitle">Enter your information to generate a predicted mental health score.</p>
+
+      <form id="predictionForm" novalidate>
+
+        <!-- PERSONAL INFORMATION -->
+        <fieldset class="form-fieldset">
+          <legend><i class="fa-solid fa-id-card"></i> Personal Information</legend>
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input type="number" id="age" name="age" min="10" max="100" required
+                     placeholder="e.g. 21" aria-describedby="ageError">
+              <span class="error-message" id="ageError" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required aria-describedby="genderError">
+                <option value="" disabled selected>Select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <span class="error-message" id="genderError" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="country">Country</label>
+              <select id="country" name="country" required aria-describedby="countryError">
+                <option value="" disabled selected>Select country</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <option value="Australia">Australia</option>
+                <option value="UK">UK</option>
+                <option value="Germany">Germany</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Turkey">Turkey</option>
+                <option value="France">France</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="error-message" id="countryError" role="alert"></span>
+            </div>
+
+          </div>
+        </fieldset>
+
+        <!-- ACADEMIC INFORMATION -->
+        <fieldset class="form-fieldset">
+          <legend><i class="fa-solid fa-book-open"></i> Academic Information</legend>
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label for="academic_Level">Academic Level</label>
+              <select id="academic_Level" name="academic_Level" required aria-describedby="academicLevelError">
+                <option value="" disabled selected>Select academic level</option>
+                <option value="High School">High School</option>
+                <option value="Undergraduate">Undergraduate</option>
+                <option value="Graduate">Graduate</option>
+              </select>
+              <span class="error-message" id="academicLevelError" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="study_Hours">Study Hours (per day)</label>
+              <input type="number" id="study_Hours" name="study_Hours" min="0" max="24" step="0.1" required
+                     placeholder="e.g. 3.5" aria-describedby="studyHoursError">
+              <span class="error-message" id="studyHoursError" role="alert"></span>
+            </div>
+
+          </div>
+        </fieldset>
+
+        <!-- SOCIAL MEDIA INFORMATION -->
+        <fieldset class="form-fieldset">
+          <legend><i class="fa-solid fa-hashtag"></i> Social Media Information</legend>
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label for="most_Used_Platform">Most Used Platform</label>
+              <select id="most_Used_Platform" name="most_Used_Platform" required aria-describedby="platformError">
+                <option value="" disabled selected>Select platform</option>
+                <option value="Facebook">Facebook</option>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Snapchat">Snapchat</option>
+                <option value="Twitter">Twitter</option>
+                <option value="YouTube">YouTube</option>
+                <option value="TikTok">TikTok</option>
+                <option value="LINE">LINE</option>
+                <option value="KakaoTalk">KakaoTalk</option>
+                <option value="VKontakte">VKontakte</option>
+                <option value="WhatsApp">WhatsApp</option>
+                <option value="WeChat">WeChat</option>
+              </select>
+              <span class="error-message" id="platformError" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="purpose_Of_Use">Purpose of Use</label>
+              <select id="purpose_Of_Use" name="purpose_Of_Use" required aria-describedby="purposeError">
+                <option value="" disabled selected>Select purpose</option>
+                <option value="Networking">Networking</option>
+                <option value="Education">Education</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="News">News</option>
+              </select>
+              <span class="error-message" id="purposeError" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="avg_Daily_Usage_Hours">Average Daily Usage Hours</label>
+              <input type="number" id="avg_Daily_Usage_Hours" name="avg_Daily_Usage_Hours"
+                     min="0" max="24" step="0.1" required
+                     placeholder="e.g. 4.5" aria-describedby="usageHoursError usageHoursHelp">
+              <small class="helper-text" id="usageHoursHelp">Average number of hours spent using social media per day.</small>
+              <span class="error-message" id="usageHoursError" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="daily_Unlocks">Daily Unlocks</label>
+              <input type="number" id="daily_Unlocks" name="daily_Unlocks" min="0" step="1" required
+                     placeholder="e.g. 60" aria-describedby="unlocksError unlocksHelp">
+              <small class="helper-text" id="unlocksHelp">How many times do you unlock/check your phone per day?</small>
+              <span class="error-message" id="unlocksError" role="alert"></span>
+            </div>
+
+          </div>
+        </fieldset>
+
+        <!-- LIFESTYLE INFORMATION -->
+        <fieldset class="form-fieldset">
+          <legend><i class="fa-solid fa-heart-pulse"></i> Lifestyle Information</legend>
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label for="physical_Activity_Hours">Physical Activity Hours</label>
+              <input type="number" id="physical_Activity_Hours" name="physical_Activity_Hours"
+                     min="0" max="24" step="0.1" required
+                     placeholder="e.g. 1.0" aria-describedby="activityError">
+              <span class="error-message" id="activityError" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="sleep_Hours_Per_Night">Sleep Hours Per Night</label>
+              <input type="number" id="sleep_Hours_Per_Night" name="sleep_Hours_Per_Night"
+                     min="0" max="24" step="0.1" required
+                     placeholder="e.g. 7.0" aria-describedby="sleepError">
+              <span class="error-message" id="sleepError" role="alert"></span>
+            </div>
+
+          </div>
+        </fieldset>
+
+        <!-- STRESS LEVEL -->
+        <fieldset class="form-fieldset">
+          <legend><i class="fa-solid fa-face-dizzy"></i> Stress Level</legend>
+          <div class="stress-options" id="stressOptions" role="radiogroup" aria-describedby="stressError">
+
+            <input type="radio" name="stress_Level" id="stressLow" value="Low" class="stress-radio">
+            <label for="stressLow" class="stress-card">
+              <i class="fa-solid fa-face-smile"></i>
+              <span>Low</span>
+            </label>
+
+            <input type="radio" name="stress_Level" id="stressMedium" value="Medium" class="stress-radio">
+            <label for="stressMedium" class="stress-card">
+              <i class="fa-solid fa-face-meh"></i>
+              <span>Medium</span>
+            </label>
+
+            <input type="radio" name="stress_Level" id="stressHigh" value="High" class="stress-radio">
+            <label for="stressHigh" class="stress-card">
+              <i class="fa-solid fa-face-flushed"></i>
+              <span>High</span>
+            </label>
+
+            <input type="radio" name="stress_Level" id="stressVeryHigh" value="Very High" class="stress-radio">
+            <label for="stressVeryHigh" class="stress-card">
+              <i class="fa-solid fa-face-dizzy"></i>
+              <span>Very High</span>
+            </label>
+
+          </div>
+          <span class="error-message" id="stressError" role="alert"></span>
+        </fieldset>
+
+        <!-- SUBMIT -->
+        <button type="submit" class="btn btn-primary btn-predict" id="predictBtn">
+          <span class="btn-text" id="predictBtnText">Predict Mental Health Score</span>
+          <span class="spinner" id="predictSpinner" hidden></span>
+        </button>
+
+        <!-- Server / network error box -->
+        <div class="server-error" id="serverError" role="alert" hidden></div>
+
+      </form>
+    </div>
+
+    <!-- ===================== RESULT SECTION ===================== -->
+    <div class="result-card" id="resultCard" hidden>
+      <h2 class="result-title">Your Predicted Mental Health Score</h2>
+
+      <div class="gauge-wrapper">
+        <svg viewBox="0 0 200 200" class="gauge-svg">
+          <circle cx="100" cy="100" r="85" class="gauge-track"></circle>
+          <circle cx="100" cy="100" r="85" class="gauge-progress" id="gaugeProgress"></circle>
+        </svg>
+        <div class="gauge-center">
+          <span class="gauge-value" id="gaugeValue">0</span>
+          <span class="gauge-caption">Predicted Score</span>
+        </div>
+      </div>
+
+      <p class="result-note">
+        <i class="fa-solid fa-circle-info"></i>
+        This is an ML-generated prediction based on the information provided.
+      </p>
+
+      <button class="btn btn-secondary" id="resetBtn">
+        <i class="fa-solid fa-rotate-left"></i> Make Another Prediction
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS SECTION ===================== -->
+<section class="how-it-works">
+  <div class="section-container">
+    <h2 class="section-heading">How It Works</h2>
+    <div class="steps-grid">
+
+      <div class="step-card">
+        <div class="step-number">01</div>
+        <i class="fa-solid fa-pen-to-square step-icon"></i>
+        <h3>Enter Information</h3>
+        <p>Provide academic, lifestyle, and social media information.</p>
+      </div>
+
+      <div class="step-connector"><i class="fa-solid fa-arrow-right"></i></div>
+
+      <div class="step-card">
+        <div class="step-number">02</div>
+        <i class="fa-solid fa-microchip step-icon"></i>
+        <h3>ML Analysis</h3>
+        <p>The information is sent securely to the FastAPI prediction API.</p>
+      </div>
+
+      <div class="step-connector"><i class="fa-solid fa-arrow-right"></i></div>
+
+      <div class="step-card">
+        <div class="step-number">03</div>
+        <i class="fa-solid fa-chart-line step-icon"></i>
+        <h3>Get Prediction</h3>
+        <p>The trained machine learning model generates a predicted mental health score.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT SECTION ===================== -->
+<section class="about-section" id="about">
+  <div class="section-container">
+    <h2 class="section-heading">About the Project</h2>
+    <p class="about-text">
+      Mental Health Predictor is a machine learning-based application designed to
+      estimate a student's mental health score using lifestyle, academic, stress,
+      and social media usage factors.
+    </p>
+
+    <div class="about-grid">
+
+      <div class="about-card">
+        <i class="fa-solid fa-robot"></i>
+        <h3>Machine Learning</h3>
+        <p>Uses a trained ML model to generate predictions.</p>
+      </div>
+
+      <div class="about-card">
+        <i class="fa-solid fa-user-graduate"></i>
+        <h3>Student Lifestyle</h3>
+        <p>Considers study, sleep, physical activity, and social media habits.</p>
+      </div>
+
+      <div class="about-card">
+        <i class="fa-solid fa-bolt"></i>
+        <h3>FastAPI Backend</h3>
+        <p>Provides a lightweight REST API for real-time predictions.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="section-container footer-container">
+    <div class="footer-brand">
+      <i class="fa-solid fa-brain"></i>
+      <span>Mental Health Predictor</span>
+    </div>
+    <p class="footer-sub">Machine Learning Project</p>
+    <p class="footer-disclaimer">
+      Educational purposes only. This tool does not provide medical diagnosis or professional mental-health advice.
+    </p>
+    <p class="footer-year">&copy; <span id="currentYear"></span> Mental Health Predictor</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
