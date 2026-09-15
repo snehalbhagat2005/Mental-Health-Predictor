@@ -16,12 +16,19 @@ The project demonstrates how Machine Learning can be integrated with a web appli
 
 ✨ Features
 🧠 Machine Learning based mental health score prediction
+
 👨‍🎓 Student-focused prediction system
+
 📊 Uses academic, lifestyle, stress, and social media factors
+
 🌐 Interactive web-based interface
+
 ⚡ FastAPI REST API backend
+
 🔒 Input validation using Pydantic
+
 📱 Responsive frontend design
+
 ☁️ Deployed online using Render
 
 ## 📸 Project Demo
@@ -91,12 +98,9 @@ The result is displayed to the user in an easy-to-understand format.
 
 🏗️ Project Architecture
 User
-  │
-  ▼
+  ->
 HTML / CSS / JavaScript
-  │
-  │  HTTP POST Request
-  ▼
+-HTTP POST Request->
 FastAPI Backend
   ->
 Input Validation
