@@ -98,17 +98,13 @@ HTML / CSS / JavaScript
   │  HTTP POST Request
   ▼
 FastAPI Backend
-  │
-  ▼
+  ->
 Input Validation
-  │
-  ▼
+  ->
 Trained ML Model
-  │
-  ▼
+  ->
 Predicted Mental Health Score
-  │
-  ▼
+  ->
 Frontend Result
 
 📊 Machine Learning
