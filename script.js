@@ -305,17 +305,34 @@ async function sendPrediction(payload) {
 }
 
 /* ---------------------------------------------------------
-   10. RESULT DISPLAY + ANIMATED CIRCULAR GAUGE
+   10. RESULT DISPLAY + ANIMATED HALF-RING GAUGE
    --------------------------------------------------------- */
 const gaugeValueEl = document.getElementById("gaugeValue");
-const gaugeProgressEl = document.getElementById("gaugeProgress");
+const gaugeFillEl = document.getElementById("gaugeFill");
+const gaugeDotEl = document.getElementById("gaugeDot");
 
-// Circle circumference for r=85 -> 2 * PI * 85 ≈ 534
-const GAUGE_CIRCUMFERENCE = 534;
+// Half-circle arc length for radius 90 -> PI * 90 ≈ 283
+const GAUGE_ARC_LENGTH = 283;
 
-// Assumes a typical 0-100 scoring range for the visual ring fill.
+// Arc geometry (must match the "d" path in the SVG markup)
+const GAUGE_CENTER_X = 110;
+const GAUGE_CENTER_Y = 120;
+const GAUGE_RADIUS = 90;
+
+// Assumes a typical 0-100 scoring range for the visual gauge.
 // The exact numeric value shown to the user is always the raw score.
 const GAUGE_MAX_SCALE = 100;
+
+// Converts a 0-1 ratio along the arc into an (x, y) point on it.
+// ratio 0 -> far left (180°), ratio 1 -> far right (0°), through the top.
+function getPointOnArc(ratio) {
+  const angleDeg = 180 - ratio * 180;
+  const angleRad = (angleDeg * Math.PI) / 180;
+  return {
+    x: GAUGE_CENTER_X + GAUGE_RADIUS * Math.cos(angleRad),
+    y: GAUGE_CENTER_Y - GAUGE_RADIUS * Math.sin(angleRad)
+  };
+}
 
 function displayResult(score) {
   // Hide the form, show the result card.
@@ -323,20 +340,53 @@ function displayResult(score) {
   resultCard.hidden = false;
   resultCard.scrollIntoView({ behavior: "smooth", block: "start" });
 
-  // Determine how much of the ring should fill (clamped 0-100%).
+  // Reset the gauge to its neutral "resting" state first, so it visibly
+  // reactivates each time a new prediction comes in.
+  gaugeFillEl.style.strokeDashoffset = GAUGE_ARC_LENGTH;
+  const restPoint = getPointOnArc(0);
+  gaugeDotEl.setAttribute("cx", restPoint.x);
+  gaugeDotEl.setAttribute("cy", restPoint.y);
+
+  // Clamp the ratio so out-of-range scores don't break the visuals.
   const clampedRatio = Math.max(0, Math.min(score / GAUGE_MAX_SCALE, 1));
-  const targetOffset = GAUGE_CIRCUMFERENCE * (1 - clampedRatio);
 
-  // Reset ring before animating.
-  gaugeProgressEl.style.strokeDashoffset = GAUGE_CIRCUMFERENCE;
-
-  // Trigger the ring fill animation on the next frame.
+  // Give the browser a frame to register the "reset" state above, then
+  // reveal the gradient arc and glide the dot marker to the score
+  // position together — this is what makes the gauge feel "alive".
   requestAnimationFrame(function () {
-    gaugeProgressEl.style.strokeDashoffset = targetOffset;
+    requestAnimationFrame(function () {
+      gaugeFillEl.style.strokeDashoffset = "0";
+      animateDotAlongArc(clampedRatio);
+    });
   });
 
   // Animate the numeric value counting up from 0 to the score.
   animateCountUp(score);
+}
+
+// Glides the dot marker from its resting position to `targetRatio`
+// along the arc over the same duration as the gradient reveal.
+function animateDotAlongArc(targetRatio) {
+  const durationMs = 1300;
+  const startTime = performance.now();
+
+  function tick(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / durationMs, 1);
+    // Ease-out curve so the dot settles smoothly, matching the CSS easing.
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const currentRatio = targetRatio * eased;
+
+    const point = getPointOnArc(currentRatio);
+    gaugeDotEl.setAttribute("cx", point.x);
+    gaugeDotEl.setAttribute("cy", point.y);
+
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+    }
+  }
+
+  requestAnimationFrame(tick);
 }
 
 // Animates the displayed number from 0 up to `targetValue` over ~1.2s.
@@ -370,6 +420,13 @@ resetBtn.addEventListener("click", function () {
 
   resultCard.hidden = true;
   formCard.hidden = false;
+
+  // Put the gauge back to its plain, neutral resting state.
+  gaugeFillEl.style.strokeDashoffset = GAUGE_ARC_LENGTH;
+  const restPoint = getPointOnArc(0);
+  gaugeDotEl.setAttribute("cx", restPoint.x);
+  gaugeDotEl.setAttribute("cy", restPoint.y);
+  gaugeValueEl.textContent = "0";
 
   predictSection.scrollIntoView({ behavior: "smooth" });
 });
