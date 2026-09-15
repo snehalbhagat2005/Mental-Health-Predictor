@@ -15,6 +15,7 @@ The application provides a simple and user-friendly interface where users can en
 The project demonstrates how Machine Learning can be integrated with a web application using FastAPI as the backend and HTML, CSS, and JavaScript as the frontend.
 
 ✨ Features
+
 🧠 Machine Learning based mental health score prediction
 
 👨‍🎓 Student-focused prediction system
@@ -49,6 +50,7 @@ The project demonstrates how Machine Learning can be integrated with a web appli
 
 
 🛠️ Technologies Used
+
 Machine Learning
 Python
 Pandas
@@ -87,6 +89,7 @@ Sleep Hours Per Night
 Stress Level
 
 🔄 How It Works
+
 The user enters their personal, academic, lifestyle, and social media information.
 The frontend validates the entered data.
 The data is sent to the FastAPI backend through a REST API.
@@ -97,6 +100,7 @@ The predicted score is returned to the frontend.
 The result is displayed to the user in an easy-to-understand format.
 
 🏗️ Project Architecture
+
 User
   ->
 HTML / CSS / JavaScript
@@ -122,6 +126,7 @@ The model takes both numerical and categorical features as input and predicts a 
 Categorical information such as gender, academic level, social media platform, purpose of use, stress level, and country is processed according to the format expected by the trained model.
 
 🔌 API
+
 Prediction Endpoint
 POST /predict
 
@@ -158,6 +163,7 @@ Live application:
 https://mental-health-predictor-o0au.onrender.com/
 
 💻 Running the Project Locally
+
 1. Clone the repository
 git clone <your-repository-url>
 cd <your-project-folder>
@@ -176,6 +182,7 @@ Open the frontend index.html file in your browser.
 Make sure the frontend API URL points to the running FastAPI backend.
 
 📁 Project Structure
+
 Mental-Health-Predictor/
 │
 ├── main.py
@@ -188,6 +195,7 @@ Mental-Health-Predictor/
 │
 └── README.md
 🔮 Future Enhancements
+
 Add more mental health indicators
 Improve model accuracy with larger datasets
 Add multiple Machine Learning models for comparison
@@ -196,6 +204,7 @@ Add personalized lifestyle recommendations
 Add user history and prediction tracking
 Improve model explainability
 Develop a dedicated mobile application
+
 🎯 Learning Outcomes
 
 Through this project, we learned:
@@ -208,6 +217,7 @@ Input validation using Pydantic
 Model serialization using Joblib
 Git and GitHub
 Cloud deployment using Render
+
 ⚠️ Disclaimer
 
 This project is developed for educational and demonstration purposes only.
